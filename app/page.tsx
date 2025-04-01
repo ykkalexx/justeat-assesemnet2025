@@ -7,12 +7,16 @@ import { fetchRestaurantsByPostcode } from "./service/api";
 import { FilteredRestaurant } from "./types";
 import { useState, useEffect } from "react";
 import { Button } from "./components/Button";
+import { Modal } from "./components/Modal";
 
 export default function Home() {
   const [postcode, setPostcode] = useState("EC4M7RF");
   const [restaurants, setRestaurants] = useState<FilteredRestaurant[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [selectedRestaurant, setSelectedRestaurant] =
+    useState<FilteredRestaurant | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSearch = async (e?: React.FormEvent) => {
     if (e) {
@@ -40,6 +44,15 @@ export default function Home() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const openRestaurantModal = (restaurant: FilteredRestaurant) => {
+    setSelectedRestaurant(restaurant);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   useEffect(() => {
@@ -85,10 +98,7 @@ export default function Home() {
             <RestaurantCard
               key={restaurant.name}
               restaurant={restaurant}
-              onClick={() => {
-                console.log("Clicked restaurant:", restaurant.name);
-                // modal implementation
-              }}
+              onClick={() => openRestaurantModal(restaurant)}
             />
           ))}
         </div>
@@ -99,6 +109,13 @@ export default function Home() {
           </div>
         )}
       </div>
+
+      {/* Restaurant details modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        restaurant={selectedRestaurant}
+      />
     </div>
   );
 }

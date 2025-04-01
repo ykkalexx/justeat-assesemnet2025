@@ -63,26 +63,19 @@ export const RestaurantCard = ({
                  hover:shadow-lg transition-all duration-300 hover:scale-[1.02] 
                  bg-white relative overflow-hidden"
     >
-      {/* rating badge */}
       <div
         className="absolute top-4 right-4 bg-[#ff8000] text-white px-2 py-1 
                     rounded-md text-sm font-semibold"
       >
         {rating.toFixed(1)}
       </div>
-
-      {/* restaurant Name */}
       <h1
         className="font-semibold text-xl text-gray-800 group-hover:text-[#ff8000] 
                      transition-colors mb-2"
       >
         {name}
       </h1>
-
-      {/* star rating of the restaurant q*/}
       <div className="flex items-center gap-1 mb-3">{renderStars()}</div>
-
-      {/* cuisines tags of the restaurant */}
       <div className="flex flex-wrap gap-2 mb-4">
         {cuisines.slice(0, 3).map((cuisine, index) => (
           <span
@@ -99,12 +92,11 @@ export const RestaurantCard = ({
           </span>
         )}
       </div>
-
-      {/* address of the restaurant */}
       <div className="flex items-start gap-2 text-gray-500">
         <MapPin size={20} className="mt-0.5 flex-shrink-0" />
         <div className="text-sm">
-          <p>{address.district}</p>
+          <p>{address.city}</p>
+          <p>{address.firstLine}</p>
           <p>{address.postalCode}</p>
         </div>
       </div>
