@@ -10,16 +10,13 @@ export const fetchRestaurantsByPostcode = async (
   postcode: string
 ): Promise<FilteredRestaurant[]> => {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_JUST_EAT_API_URL}/${postcode}`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`/api/restaurants?postcode=${postcode}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
