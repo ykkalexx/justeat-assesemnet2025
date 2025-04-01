@@ -5,19 +5,22 @@ import { MagnifyingGlass, MapPin } from "@phosphor-icons/react";
 import { RestaurantCard } from "./components/RestaurantCard";
 import { fetchRestaurantsByPostcode } from "./service/api";
 import { FilteredRestaurant } from "./types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "./components/Button";
 
 export default function Home() {
-  const [postcode, setPostcode] = useState("");
+  const [postcode, setPostcode] = useState("EC4M7RF");
   const [restaurants, setRestaurants] = useState<FilteredRestaurant[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Searching for restaurants in:", postcode);
-    if (!postcode.trim()) {
+  const handleSearch = async (e?: React.FormEvent) => {
+    if (e) {
+      e.preventDefault();
+    }
+    const formattedPostcode = postcode.replace(/\s+/g, "");
+    console.log("Searching for restaurants in:", formattedPostcode);
+    if (!formattedPostcode.trim()) {
       setError("Please enter a postcode");
       return;
     }
@@ -26,7 +29,7 @@ export default function Home() {
       setLoading(true);
       setError(null);
       console.log("hit");
-      const data = await fetchRestaurantsByPostcode(postcode);
+      const data = await fetchRestaurantsByPostcode(formattedPostcode);
       console.log("data", data);
       setRestaurants(data.slice(0, 10));
     } catch (err) {
@@ -38,6 +41,10 @@ export default function Home() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    handleSearch();
+  }, []);
 
   return (
     <div className="w-full h-screen flex flex-col items-center p-6">
