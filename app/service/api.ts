@@ -5,7 +5,14 @@ export const fetchRestaurantsByPostcode = async (
 ): Promise<FilteredRestaurant[]> => {
   try {
     const response = await fetch(
-      `https://uk.api.just-eat.io/discovery/uk/restaurants/enriched/bypostcode/${postcode}`
+      `https://uk.api.just-eat.io/discovery/uk/restaurants/enriched/bypostcode/${postcode}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
     );
 
     if (!response.ok) {
