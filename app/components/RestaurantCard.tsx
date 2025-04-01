@@ -105,9 +105,7 @@ export const RestaurantCard = ({
         <MapPin size={20} className="mt-0.5 flex-shrink-0" />
         <div className="text-sm">
           <p>{address.district}</p>
-          <p>
-            {address.area}, {address.postalCode}
-          </p>
+          <p>{address.postalCode}</p>
         </div>
       </div>
     </div>

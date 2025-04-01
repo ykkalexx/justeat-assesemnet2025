@@ -4,8 +4,8 @@ export interface RestaurantLocation {
 }
 
 export interface RestaurantAddress {
-  canonicalName: string;
-  district: string;
+  city: string;
+  firstLine: string;
   postalCode: string;
   area: string;
   location: RestaurantLocation;

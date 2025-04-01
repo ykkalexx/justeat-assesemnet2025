@@ -30,10 +30,9 @@ export const fetchRestaurantsByPostcode = async (
       cuisines: restaurant.cuisines.map((cuisine: Cuisine) => cuisine.name),
       rating: restaurant.rating.starRating,
       address: {
-        canonicalName: restaurant.address.canonicalName,
-        district: restaurant.address.district,
+        city: restaurant.address.city,
+        firstLine: restaurant.address.firstLine,
         postalCode: restaurant.address.postalCode,
-        area: restaurant.address.area,
         location: restaurant.address.location,
       },
     }));
