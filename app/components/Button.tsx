@@ -46,30 +46,30 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         disabled={isLoading || disabled}
         className={cn(
-          // Base styles
+          // base styles
           "font-semibold rounded-xl transition-all duration-300",
           "focus:outline-none focus:ring-2 focus:ring-offset-2",
           "transform hover:scale-[1.02] active:scale-[0.98]",
 
-          // Variant styles
+          // variant styles
           variants[variant],
           variant === "primary" && "focus:ring-[#ff8000]/50",
           variant === "secondary" && "focus:ring-gray-200",
           variant === "outline" && "focus:ring-[#ff8000]/50",
 
-          // Size styles
+          // size styles
           sizes[size],
 
-          // Width styles
+          // width styles
           fullWidth && "w-full",
 
-          // Disabled styles
+          // disabled styles
           "disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none",
 
-          // Loading styles
+          // loading styles
           isLoading && "cursor-wait",
 
-          // Custom classes
+          // custom classes
           className
         )}
         {...props}
