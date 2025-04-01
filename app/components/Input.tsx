@@ -1,7 +1,7 @@
-"use client";
-
 import React, { InputHTMLAttributes, forwardRef } from "react";
 import { cn } from "../utils/cn";
+
+// this whole component is overkill but gotta do what you gotta do
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
