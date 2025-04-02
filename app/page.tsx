@@ -109,8 +109,6 @@ export default function Home() {
           </div>
         )}
       </div>
-
-      {/* Restaurant details modal */}
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}

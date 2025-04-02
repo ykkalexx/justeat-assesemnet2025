@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { X, Star, StarHalf, MapPin } from "@phosphor-icons/react";
 import { FilteredRestaurant } from "../types";
-import { Map } from "./Map";
+import { Map } from "./Map/Map";
 
 interface ModalProps {
   isOpen: boolean;
@@ -133,10 +133,13 @@ export const Modal = ({ isOpen, onClose, restaurant }: ModalProps) => {
           <div className="mb-6">
             <h3 className="text-lg font-semibold mb-2">Location</h3>
             <div className="bg-gray-100 p-4 rounded-lg text-center">
-              <div className="mt-2 h-48 bg-gray-200 rounded flex items-center justify-center">
-                <p className="text-gray-500">
-                  <Map position={restaurant.address.location.coordinates} />
-                </p>
+              <div className="mt-2 h-48  rounded flex items-center justify-center">
+                <Map
+                  position={[
+                    restaurant.address.location.coordinates[1],
+                    restaurant.address.location.coordinates[0],
+                  ]}
+                />
               </div>
             </div>
           </div>
