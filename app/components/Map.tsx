@@ -1,7 +1,8 @@
-// Docs : https://react-leaflet.js.org/docs/start-installation/
+"use client";
 
 import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 
 interface MapProps {
   position: [number, number];
@@ -9,21 +10,19 @@ interface MapProps {
 
 export const Map: React.FC<MapProps> = ({ position }) => {
   return (
-    <div className="w-full h-full">
+    <div className="h-full w-full">
       <MapContainer
         center={position}
         zoom={13}
         scrollWheelZoom={false}
-        className="h-full w-full"
+        style={{ height: "100%", width: "100%" }}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <Marker position={position}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
+          <Popup>Restaurant Location</Popup>
         </Marker>
       </MapContainer>
     </div>

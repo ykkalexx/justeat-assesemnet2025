@@ -1,5 +1,4 @@
 import React, { ButtonHTMLAttributes, forwardRef } from "react";
-import { cn } from "../utils/cn";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "outline";
@@ -14,7 +13,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
-      className,
+      className = "",
       variant = "primary",
       size = "md",
       fullWidth = false,
@@ -41,37 +40,32 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       lg: "px-8 py-4 text-lg",
     };
 
+    let buttonClasses = "font-semibold rounded-xl transition-all duration-300 ";
+    buttonClasses += "focus:outline-none focus:ring-2 focus:ring-offset-2 ";
+    buttonClasses += "transform hover:scale-[1.02] active:scale-[0.98] ";
+
+    buttonClasses += variants[variant] + " ";
+
+    if (variant === "primary") buttonClasses += "focus:ring-[#ff8000]/50 ";
+    if (variant === "secondary") buttonClasses += "focus:ring-gray-200 ";
+    if (variant === "outline") buttonClasses += "focus:ring-[#ff8000]/50 ";
+
+    buttonClasses += sizes[size] + " ";
+
+    if (fullWidth) buttonClasses += "w-full ";
+
+    buttonClasses +=
+      "disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none ";
+
+    if (isLoading) buttonClasses += "cursor-wait ";
+
+    buttonClasses += className;
+
     return (
       <button
         ref={ref}
         disabled={isLoading || disabled}
-        className={cn(
-          // base styles
-          "font-semibold rounded-xl transition-all duration-300",
-          "focus:outline-none focus:ring-2 focus:ring-offset-2",
-          "transform hover:scale-[1.02] active:scale-[0.98]",
-
-          // variant styles
-          variants[variant],
-          variant === "primary" && "focus:ring-[#ff8000]/50",
-          variant === "secondary" && "focus:ring-gray-200",
-          variant === "outline" && "focus:ring-[#ff8000]/50",
-
-          // size styles
-          sizes[size],
-
-          // width styles
-          fullWidth && "w-full",
-
-          // disabled styles
-          "disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none",
-
-          // loading styles
-          isLoading && "cursor-wait",
-
-          // custom classes
-          className
-        )}
+        className={buttonClasses}
         {...props}
       >
         <div className="flex items-center justify-center gap-2">

@@ -133,10 +133,6 @@ export const Modal = ({ isOpen, onClose, restaurant }: ModalProps) => {
           <div className="mb-6">
             <h3 className="text-lg font-semibold mb-2">Location</h3>
             <div className="bg-gray-100 p-4 rounded-lg text-center">
-              <p className="text-sm text-gray-500">
-                Coordinates: {restaurant.address.location.coordinates[0]},{" "}
-                {restaurant.address.location.coordinates[1]}
-              </p>
               <div className="mt-2 h-48 bg-gray-200 rounded flex items-center justify-center">
                 <p className="text-gray-500">
                   <Map position={restaurant.address.location.coordinates} />

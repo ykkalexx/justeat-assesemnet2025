@@ -1,7 +1,6 @@
 import React, { InputHTMLAttributes, forwardRef } from "react";
-import { cn } from "../utils/cn";
 
-// this whole component is overkill but gotta do what you gotta do
+// this whole component feels is overkill but gotta do what you gotta do
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -22,14 +21,31 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       helperText,
       startIcon,
       endIcon,
-      className,
+      className = "",
       fullWidth = false,
       ...props
     },
     ref
   ) => {
+    let inputClasses =
+      "h-12 rounded-xl border bg-white px-4 text-base transition-all duration-200 placeholder:text-gray-400 focus:outline-none focus:ring-2";
+
+    inputClasses += error
+      ? " border-red-500 focus:border-red-500 focus:ring-red-100"
+      : " border-gray-200 focus:border-blue-500 focus:ring-blue-100";
+
+    if (startIcon) inputClasses += " pl-10";
+    if (endIcon) inputClasses += " pr-10";
+    if (fullWidth) inputClasses += " w-full";
+
+    inputClasses += className ? ` ${className}` : "";
+
     return (
-      <div className={cn("flex flex-col gap-1", fullWidth && "w-full")}>
+      <div
+        className={
+          fullWidth ? "flex flex-col gap-1 w-full" : "flex flex-col gap-1"
+        }
+      >
         {label && (
           <label className="text-sm font-medium text-gray-700">{label}</label>
         )}
@@ -39,28 +55,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               {startIcon}
             </div>
           )}
-          <input
-            ref={ref}
-            className={cn(
-              // the base styles of the input
-              "h-12 rounded-xl border bg-white px-4 text-base transition-all duration-200",
-              "placeholder:text-gray-400",
-              // the focus styles of the input
-              "focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100",
-              // the error styles of the input
-              error
-                ? "border-red-500 focus:border-red-500 focus:ring-red-100"
-                : "border-gray-200",
-              // the padding of the input when there is an icon
-              startIcon && "pl-10",
-              endIcon && "pr-10",
-              // the width of the input
-              fullWidth && "w-full",
-              // the custom classes of the input
-              className
-            )}
-            {...props}
-          />
+          <input ref={ref} className={inputClasses} {...props} />
           {endIcon && (
             <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
               {endIcon}
@@ -69,7 +64,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         </div>
         {(error || helperText) && (
           <span
-            className={cn("text-sm", error ? "text-red-500" : "text-gray-500")}
+            className={error ? "text-sm text-red-500" : "text-sm text-gray-500"}
           >
             {error || helperText}
           </span>
