@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Live Link :
 
-## Getting Started
+### Running This Project
 
-First, run the development server:
+**1. Clone the repo**
+
+```bash
+git clone https://github.com/ykkalexx/justeat-assesemnet2025.git
+```
+
+**2. Cd in the directory and install deps**
+
+```bash
+cd ./justeat-assesemnet2025
+npm install
+```
+
+**3. Create a .env file with this**
+
+```bash
+NEXT_PUBLIC_JUST_EAT_API_URL="just eat url for the api"
+```
+
+**4. Run the Project**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Assumptions
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- The application will work only using the UK postcodes
+- The data fetching needs to include filters in order to fetch only the data needed for this assesement and return only the first
+  10 restaurants
+- Need to present the data in a theme matching Just Eat's products.
+- Initially believed that there was no need for a backend, but i did need a backend layer in order to fetch the data using the given API endpoint by just eat because my assumption is that the API endpoint doesn't have CORS headers that allow request from a localhost / browser domain. Essentially when the browser makes the requests it sends a preflights 'OPTIONS' request and the server doesn't respond with the neccesary permission headers and so the browser blocks the actual request. Essentially my server acts as a proxy.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Client -> My Server -> Just Eat Api
 
-## Learn More
+Just Eat Api -> My Server -> Client
 
-To learn more about Next.js, take a look at the following resources:
+### Improvements
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Caching**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+I could implement client-side caching with React Query or server-side catching for API responses, in order to reduce load and improve the performance of the website.
+The catching will work my storing the most recent search results in local storage
 
-## Deploy on Vercel
+2. **Performance Optimization**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+In order to improve the performance of this application , i could implement virtualized lists for restaurants when displaying many results, also adding image lazy loading.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. **Offline Support**
+
+Adding offline support with service workers.
+
+5. **Map Improvements**
+
+6. **Testing**

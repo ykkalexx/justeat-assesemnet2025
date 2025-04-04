@@ -8,6 +8,8 @@ import { FilteredRestaurant } from "./types";
 import { useState, useEffect } from "react";
 import { Button } from "./components/Button";
 import { Modal } from "./components/Modal";
+import { CaretDown } from "@phosphor-icons/react";
+import Sorting from "./components/Sorting";
 
 export default function Home() {
   const [postcode, setPostcode] = useState("EC4M7RF");
@@ -17,6 +19,8 @@ export default function Home() {
   const [selectedRestaurant, setSelectedRestaurant] =
     useState<FilteredRestaurant | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [sortBy, setSortBy] = useState<"rating" | "cuisine">("rating");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
 
   const handleSearch = async (e?: React.FormEvent) => {
     if (e) {
@@ -59,6 +63,30 @@ export default function Home() {
     handleSearch();
   }, []);
 
+  const sortRestaurants = (): FilteredRestaurant[] => {
+    const sorted = [...restaurants];
+
+    switch (sortBy) {
+      case "rating":
+        sorted.sort((a, b) =>
+          sortOrder === "desc" ? b.rating - a.rating : a.rating - b.rating
+        );
+        break;
+
+      case "cuisine":
+        sorted.sort((a, b) => {
+          const cuisineA = a.cuisines[0]?.toUpperCase() || "";
+          const cuisineB = b.cuisines[0]?.toUpperCase() || "";
+          return sortOrder === "desc"
+            ? cuisineB.localeCompare(cuisineA)
+            : cuisineA.localeCompare(cuisineB);
+        });
+        break;
+    }
+
+    return sorted;
+  };
+
   return (
     <div className="w-full h-screen flex flex-col items-center p-6">
       <div className="w-full max-w-md">
@@ -93,8 +121,15 @@ export default function Home() {
           <span className="text-[#ff8000]">{postcode}</span>
         </h1>
 
+        <Sorting
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          sortOrder={sortOrder}
+          setSortOrder={setSortOrder}
+        />
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 w-full">
-          {restaurants.map((restaurant) => (
+          {sortRestaurants().map((restaurant) => (
             <RestaurantCard
               key={restaurant.name}
               restaurant={restaurant}

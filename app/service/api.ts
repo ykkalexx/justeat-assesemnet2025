@@ -25,7 +25,7 @@ export const fetchRestaurantsByPostcode = async (
     const data = await response.json();
 
     // Filter and transform the data to match the required structure
-    return data.restaurants.map((restaurant: RawRestaurant) => ({
+    return data.restaurants.slice(0, 10).map((restaurant: RawRestaurant) => ({
       name: restaurant.name,
       cuisines: restaurant.cuisines.map((cuisine: Cuisine) => cuisine.name),
       rating: restaurant.rating.starRating,
