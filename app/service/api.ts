@@ -1,11 +1,5 @@
 import { Cuisine, FilteredRestaurant, RawRestaurant } from "../types";
 
-if (!process.env.NEXT_PUBLIC_JUST_EAT_API_URL) {
-  throw new Error(
-    "NEXT_PUBLIC_JUST_EAT_API_URL is not defined in environment variables"
-  );
-}
-
 export const fetchRestaurantsByPostcode = async (
   postcode: string
 ): Promise<FilteredRestaurant[]> => {

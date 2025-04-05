@@ -5,6 +5,12 @@
 
 import { NextResponse } from "next/server";
 
+if (!process.env.NEXT_PUBLIC_JUST_EAT_API_URL) {
+  throw new Error(
+    "NEXT_PUBLIC_JUST_EAT_API_URL is not defined in environment variables"
+  );
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const postcode = searchParams.get("postcode");
