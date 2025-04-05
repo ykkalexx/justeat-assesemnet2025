@@ -1,1 +1,34 @@
 @import "tailwindcss";
+
+.high-contrast {
+  --bg-color: #000000;
+  --text-color: #ffffff;
+  --heading-color: #ffff00;
+  --link-color: #00ffff;
+  --border-color: #ffffff;
+
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.high-contrast h1,
+.high-contrast h2,
+.high-contrast h3 {
+  color: var(--heading-color);
+}
+
+.high-contrast a {
+  color: var(--link-color);
+}
+
+.high-contrast .bg-white {
+  background-color: #000;
+  color: #fff;
+  border: 1px solid var(--border-color);
+}
+
+.high-contrast .text-gray-600,
+.high-contrast .text-gray-700,
+.high-contrast .text-gray-800 {
+  color: #fff !important;
+}
