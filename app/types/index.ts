@@ -3,7 +3,7 @@ export interface RestaurantLocation {
   coordinates: [number, number];
 }
 
-export interface RestaurantAddress {
+interface RestaurantAddress {
   city: string;
   firstLine: string;
   postalCode: string;
@@ -11,7 +11,7 @@ export interface RestaurantAddress {
   location: RestaurantLocation;
 }
 
-export interface Cuisine {
+interface Cuisine {
   name: string;
   uniqueName: string;
 }

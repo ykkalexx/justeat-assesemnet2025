@@ -10,6 +10,7 @@ import { Button } from "./components/Button";
 import { Modal } from "./components/Modal";
 import { CaretDown } from "@phosphor-icons/react";
 import Sorting from "./components/Sorting";
+import Skeleton from "./components/Skeleton";
 
 export default function Home() {
   const [postcode, setPostcode] = useState("EC4M7RF");
@@ -127,6 +128,14 @@ export default function Home() {
           sortOrder={sortOrder}
           setSortOrder={setSortOrder}
         />
+
+        {loading && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 w-full">
+            {[...Array(6)].map((_, i) => (
+              <Skeleton key={i} />
+            ))}
+          </div>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 w-full">
           {sortRestaurants().map((restaurant) => (

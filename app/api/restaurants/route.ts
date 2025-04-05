@@ -24,7 +24,7 @@ export async function GET(request: Request) {
 
   try {
     const response = await fetch(
-      `https://uk.api.just-eat.io/discovery/uk/restaurants/enriched/bypostcode/${postcode}`,
+      `${process.env.NEXT_PUBLIC_JUST_EAT_API_URL}/${postcode}`,
       {
         method: "GET",
         headers: {
