@@ -1,5 +1,3 @@
-## Live Link :
-
 ### Running This Project
 
 **1. Clone the repo**

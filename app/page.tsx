@@ -22,6 +22,8 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [sortBy, setSortBy] = useState<"rating" | "cuisine">("rating");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [cuisineFilter, setCuisineFilter] = useState("");
+  const [minRating, setMinRating] = useState(0);
 
   const handleSearch = async (e?: React.FormEvent) => {
     if (e) {
@@ -64,8 +66,28 @@ export default function Home() {
     handleSearch();
   }, []);
 
-  const sortRestaurants = (): FilteredRestaurant[] => {
-    const sorted = [...restaurants];
+  const getFilteredAndSortedRestaurants = () => {
+    // first i filter the restaurants based on criteria
+    const filtered = restaurants.filter((restaurant) => {
+      // then by by minimum rating
+      if (minRating > 0 && restaurant.rating < minRating) {
+        return false;
+      }
+
+      // filter by cuisine if a filter is set
+      if (cuisineFilter.trim() !== "") {
+        const matchesCuisine = restaurant.cuisines.some((cuisine) =>
+          cuisine.toLowerCase().includes(cuisineFilter.toLowerCase())
+        );
+        if (!matchesCuisine) {
+          return false;
+        }
+      }
+
+      return true;
+    });
+
+    const sorted = [...filtered];
 
     switch (sortBy) {
       case "rating":
@@ -129,6 +151,46 @@ export default function Home() {
           setSortOrder={setSortOrder}
         />
 
+        {restaurants.length > 0 && !loading && (
+          <div className="w-1/2 mt-6 p-4 bg-white rounded-xl shadow-sm">
+            <h3 className="font-semibold text-lg mb-4">Filter Results</h3>
+            <div className="flex flex-col md:flex-row gap-4">
+              <div className="flex-1">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Filter by cuisine
+                </label>
+                <Input
+                  placeholder="e.g. Italian, Pizza..."
+                  startIcon={<MagnifyingGlass className="w-4 h-4" />}
+                  value={cuisineFilter}
+                  onChange={(e) => setCuisineFilter(e.target.value)}
+                  fullWidth
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Minimum rating
+                </label>
+                <select
+                  className="h-12 rounded-xl border border-gray-200 px-4 text-base"
+                  value={minRating}
+                  onChange={(e) => setMinRating(Number(e.target.value))}
+                >
+                  <option value="0">Any rating</option>
+                  <option value="3">3+ stars</option>
+                  <option value="4">4+ stars</option>
+                  <option value="4.5">4.5+ stars</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="mt-4 text-sm text-gray-500">
+              Showing {getFilteredAndSortedRestaurants().length} of{" "}
+              {restaurants.length} restaurants
+            </div>
+          </div>
+        )}
+
         {loading && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 w-full">
             {[...Array(6)].map((_, i) => (
@@ -138,7 +200,7 @@ export default function Home() {
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 w-full">
-          {sortRestaurants().map((restaurant) => (
+          {getFilteredAndSortedRestaurants().map((restaurant) => (
             <RestaurantCard
               key={restaurant.name}
               restaurant={restaurant}
