@@ -1,3 +1,7 @@
+### Live Link
+
+This Assesement can be seen live at :
+
 ### Running This Project
 
 **1. Clone the repo**
@@ -13,7 +17,7 @@ cd ./justeat-assesemnet2025
 npm install
 ```
 
-**3. Create a .env file with this**
+**3. Create a .env file in project root with this**
 
 ```bash
 NEXT_PUBLIC_JUST_EAT_API_URL="just eat url for the api"
