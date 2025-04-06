@@ -1,6 +1,12 @@
-### Live Link
+### Live Demo
 
-This Assesement can be seen live at :
+You can view the live version of this Just Eat assessment at:
+
+### [https://justeat-assesemnet2025.vercel.app](https://justeat-assesemnet2025.vercel.app)
+
+[![Just Eat Assessment Screenshot](https://i.imgur.com/bbQYuHt.png)](https://justeat-assesemnet2025.vercel.app)
+
+[![Just Eat Assessment Screenshot](https://i.imgur.com/VHBdhia.png)](https://justeat-assesemnet2025.vercel.app)
 
 ### Running This Project
 
@@ -28,6 +34,15 @@ NEXT_PUBLIC_JUST_EAT_API_URL="just eat url for the api"
 ```bash
 npm run dev
 ```
+
+### Features in the Live Demo:
+
+- Search for just eat restaurants by UK postcode (such as "EC4M7RF")
+- Filter results by cuisine type and minimum rating
+- Sort restaurants by rating or cuisine type
+- View detailed restaurant information with interactive map
+- Accessibility settings for font size and high contrast mode
+- Fully responsive design for mobile, tablet, and desktop
 
 ### Assumptions
 
