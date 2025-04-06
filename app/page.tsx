@@ -151,7 +151,7 @@ export default function Home() {
         />
 
         {restaurants.length > 0 && !loading && (
-          <div className="w-1/2 mt-6 p-4 bg-white rounded-xl shadow-sm">
+          <div className="w-full mt-6 p-4 bg-white rounded-xl shadow-sm">
             <h3 className="font-semibold text-lg mb-4">Filter Results</h3>
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
