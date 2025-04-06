@@ -11,7 +11,7 @@ interface RestaurantAddress {
   location: RestaurantLocation;
 }
 
-interface Cuisine {
+export interface Cuisine {
   name: string;
   uniqueName: string;
 }

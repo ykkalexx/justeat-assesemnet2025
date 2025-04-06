@@ -145,10 +145,10 @@ export const Modal = ({ isOpen, onClose, restaurant }: ModalProps) => {
           </div>
           <div className="flex gap-3 mt-4">
             <button className="flex-1 bg-[#ff8000] text-white py-3 rounded-lg font-medium hover:bg-[#e67300] transition-colors">
-              Fancy Button
+              Add To Cart
             </button>
             <button className="flex-1 border border-[#ff8000] text-[#ff8000] py-3 rounded-lg font-medium hover:bg-orange-50 transition-colors">
-              Fancy Button 2
+              Save to Favourites
             </button>
           </div>
         </div>

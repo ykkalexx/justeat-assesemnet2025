@@ -8,7 +8,6 @@ import { FilteredRestaurant } from "./types";
 import { useState, useEffect } from "react";
 import { Button } from "./components/Button";
 import { Modal } from "./components/Modal";
-import { CaretDown } from "@phosphor-icons/react";
 import Sorting from "./components/Sorting";
 import Skeleton from "./components/Skeleton";
 
